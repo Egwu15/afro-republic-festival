@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import 'tailwindcss';
 
 @plugin 'tailwindcss-animate';
@@ -8,12 +9,26 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    --font-display: 'softeraphy';
+    --font-body: 'poppins';
+    --color-custom-green: #2CBA32;
+    --color-custom-yellow: #FAD205;
+    --color-custom-orange: #F56144;
+    --color-custom-blue: #3AC6F0;
+    --color-custom-light-green: #0BF8C4;
+
+    --animate-marque: marque 30s ease-in-out infinite;
+
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        'poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
+
+
+    --shadow-2xl: 5px 6px 1px rgba(0, 0, 0, 0.25);
+    --shadow-2xl-hover: 6px 8px 2px rgba(0, 0, 0, 0.85);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -68,6 +83,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
     *,
     ::after,
     ::before,
@@ -120,5 +136,35 @@
 
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+@font-face {
+    font-family: 'softeraphy';
+    src: url("/fonts/softeraphy.ttf") format('truetype');
+    font-style: normal;
+    font-weight: 200 300 400 500 600 700 800 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../fonts/MyCustomFont-Bold.woff2') format('woff2'),
+        url('../fonts/MyCustomFont-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@keyframes marque {
+    0% {
+        transform: translateX(-20%);
+    }
+
+    50% {
+        transform: translateX(50%);
+    }
+
+    100% {
+        transform: translateX(0%);
     }
 }
