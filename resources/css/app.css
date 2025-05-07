@@ -147,13 +147,13 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'MyCustomFont';
-    src: url('../fonts/MyCustomFont-Bold.woff2') format('woff2'),
-        url('../fonts/MyCustomFont-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: 'MyCustomFont';*/
+/*    src: url('../fonts/MyCustomFont-Bold.woff2') format('woff2'),*/
+/*        url('../fonts/MyCustomFont-Bold.woff') format('woff');*/
+/*    font-weight: bold;*/
+/*    font-style: normal;*/
+/*}*/
 
 @keyframes marque {
     0% {
