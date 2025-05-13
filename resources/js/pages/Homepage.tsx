@@ -174,7 +174,7 @@ function Homepage({ tickets }: { tickets: TicketPageProps[] }) {
                             <br />
                             the people, and the unforgettable moments.
                         </p>
-                        <div className="my-9 bg-[#CEFEF3] p-8">
+                        <div className="my-9 bg-[#CEFEF3] p-8  ">
                             <img src={beach} alt="Beach festival" />
                         </div>
                         <p className="font-display text-5xl">
