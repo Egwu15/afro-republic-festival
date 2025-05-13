@@ -1,3 +1,4 @@
+import verifiedRed from '@/assets/icons/verified_red.png';
 import PriceCard from '@/components/mine/PriceCard';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { TicketPageProps } from '@/types';
@@ -33,10 +34,20 @@ function TicketPage({ ticket, formattedDate }: { ticket: TicketPageProps; format
                         </div>
 
                         <div className="w-full rounded border border-red-400">
-                            <p className="font-display p-2 font-light">SELECTION</p>
+                            <p className="font-display px-3 py-2 font-light">SELECTION</p>
                             <hr className="border-red-400" />
-                            <p className="font-display p-2">{ticket.name}</p>
-                            <p>{formattedDate}</p>
+                            <div className="px-3 py-5">
+                                <div className="flex justify-between">
+                                    <div className="flex items-center">
+                                        <img src={verifiedRed} alt="Verified Red" />
+                                        <p className="font-display p-2">
+                                            {ticket.name} . {quantity}pcs
+                                        </p>
+                                    </div>
+                                    <p className="px-3">${ticket.price * quantity}</p>
+                                </div>
+                                <p className="px-3">{formattedDate}</p>
+                            </div>
                         </div>
                     </div>
                 </section>
