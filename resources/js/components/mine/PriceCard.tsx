@@ -13,7 +13,7 @@ type Props = {
 
 function PriceCard({ price, backgroundColor, header, description, id, children }: Props) {
     return (
-        <div style={{ backgroundColor: backgroundColor }} className="my-5 py-5">
+        <div style={{ backgroundColor: backgroundColor }} className="py-5">
             <div className="mx-7 mt-5 border-1 border-black bg-white px-5 py-1.5 shadow-2xl shadow-black">{header}</div>
             <h2 className="font-display mt-9 text-center text-7xl">${price}</h2>
             <div className="mx-7 mt-8 flex bg-black/40 px-3 py-6 text-sm text-white">
