@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { TicketPageProps } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
+import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
 export default function CheckOut({ ticket, quantity }: { ticket: TicketPageProps; quantity: number }) {
@@ -17,7 +18,7 @@ export default function CheckOut({ ticket, quantity }: { ticket: TicketPageProps
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('register'), {
+        post(route('processPayment'), {
             onFinish: () => reset(),
         });
     };
@@ -66,10 +67,10 @@ export default function CheckOut({ ticket, quantity }: { ticket: TicketPageProps
                     </div>
 
                     <div
-                        // onClick={() => checkOut()}
+                        onClick={(e) => submit(e)}
                         className="font-display shadow-custom-orange border-custom-orange my-5 w-full border-1 bg-white px-5 py-1.5 shadow-2xl hover:bg-black hover:text-white hover:shadow-white"
                     >
-                        {/*{progress && <LoaderCircle className="animate-spin" />}*/}
+                        {processing && <LoaderCircle className="animate-spin" />}
                         CONTINUE TO CHECKOUT
                     </div>
                 </section>

@@ -22,6 +22,28 @@ Route::post('/ticket', [TicketController::class, 'store'])->name('ticket.store')
 
 Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
 
+Route::post('/processPayment', [CheckOutController::class, 'process'])->name('processPayment');
+
+Route::get('processPayment', [CheckOutController::class, 'index']);
+
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'stripeCallback'])
+    ->name('payment.stripe.callback');
+
+//TODO:: remove after testing
+Route::get('testMail', function () {
+    return view('mail.recept', ['metadata' => [
+        'ticket_id' => 123,
+        'quantity' => 2,
+        'first_name' => 'Test',
+        'last_name' => 'User',
+        'email' => 'test@example.com',
+        'receipt_email' => 'test@example.com',
+        'phone_number' => '08000000000',
+        'payment_intent_id' => 'pi_3RXs9SGLt97pNKrR08twJuN3',
+    ]]);
+});
+
+
 
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     Route::get('dashboard', function () {

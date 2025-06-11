@@ -8,7 +8,7 @@
 
 
         {{-- Inline style to set the HTML background color based on our theme in app.css --}}
-       
+
 
         <title inertia>{{ config('app.name', 'AfroRepublic') }}</title>
 
