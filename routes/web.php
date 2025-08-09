@@ -20,7 +20,13 @@ Route::get('/ticket/{ticket}', function (Ticket $ticket) {
 
 Route::post('/ticket', [TicketController::class, 'store'])->name('ticket.store');
 
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
+
 Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
+
+Route::get('/event', fn() => [])->name('event');
 
 Route::post('/processPayment', [CheckOutController::class, 'process'])->name('processPayment');
 

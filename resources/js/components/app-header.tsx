@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { type BreadcrumbItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, Menu } from 'lucide-react';
+import { BookOpen, Folder, Info, Menu } from 'lucide-react';
 
 const rightNavItems: NavItem[] = [
     {
@@ -17,6 +17,11 @@ const rightNavItems: NavItem[] = [
         title: 'Checkout',
         href: route('checkout'),
         icon: BookOpen,
+    },
+    {
+        title: 'About',
+        href: route('about'),
+        icon: Info,
     },
 ];
 

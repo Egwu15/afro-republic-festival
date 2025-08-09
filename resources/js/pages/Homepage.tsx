@@ -1,17 +1,15 @@
 import artist from '@/assets/images/artist.png';
 import background from '@/assets/images/background.jpg';
 import beach from '@/assets/images/beach.jpg';
-import festival from '@/assets/images/festival.jpg';
-import ArtistCard from '@/components/mine/ArtistCard';
-import OutlinedButton from '@/components/mine/OutlinedButton';
-import PriceCard from '@/components/mine/PriceCard';
+import EventCard from '@/components/mine/EventCard';
+import { Button } from '@/components/ui/button';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
-import { TicketPageProps } from '@/types';
+import { Link } from '@inertiajs/react';
 
-function Homepage({ tickets }: { tickets: TicketPageProps[] }) {
+function Homepage() {
     return (
         <AppHeaderLayout>
-            <main>
+            <main className="bg-custom-gray">
                 <section
                     className="font-body relative w-full items-center justify-center bg-cover bg-center"
                     style={{ backgroundImage: `url(${background})` }}
@@ -23,147 +21,62 @@ function Homepage({ tickets }: { tickets: TicketPageProps[] }) {
                     <div className="relative py-24 text-center text-white">
                         <div className="font-display text-4xl md:text-9xl">
                             <p>
-                                Feel the <span className="text-yellow-300">Rhythm</span>,
+                                One <span className="text-yellow-300">Rhythm</span>,
                             </p>
                             <p className="my-2">
-                                Live the <span className="bg-yellow-300 text-black">Vibe!</span>
+                                One <span className="bg-[#9747FF] px-2 text-black">Vibe!</span> One{' '}
+                                <span className="bg-yellow-300 text-black">Vibe!</span>
                             </p>
                         </div>
                         <p className="mx-auto mt-6 max-w-3xl px-4 text-2xl md:px-0">
-                            The world’s biggest celebration of{' '}
-                            <span className="text-yellow-300">Afrobeats, Amapiano, and global sounds is BACK!</span> Join thousands of music lovers at
-                            an unforgettable festival filled with music, culture, and pure energy.
+                            We bring the world together through the electrifying rhythm of Afrobeats, Amapiano, and global sounds. Our mission is to
+                            create unforgettable parties and festivals that celebrate music, culture and pure energy uniting diverse communities in a
+                            vibrant atmosphere of joy, rhythm, and unstoppable good vibes.
                         </p>
-                        <div className="mt-12 flex items-center justify-center">
-                            <button className="hover:shadow-2xl-hover border-2 border-yellow-300 bg-black px-5 py-1.5 shadow-2xl shadow-yellow-300 hover:shadow-amber-400">
-                                {' '}
-                                Get Ticket
-                            </button>
-                            <OutlinedButton className="mx-9">Explore Lineup</OutlinedButton>
-                        </div>
                     </div>
                 </section>
-
                 <section className="bg-custom-green overflow-hidden px-2 py-6">
                     <h3 className="animate-marque font-display text-nowrap md:text-5xl">
-                        ⭐ LONDON, UNITED KINGDOM ⭐ SATURDAY 26TH JULY, 2025 ⭐ LONDON, UNITED KINGDOM ⭐ SATURDAY 26TH JULY, 2025 ⭐ LONDON, UNITED
-                        KINGDOM ⭐{' '}
+                        ⭐ GOOD VIBES ⭐ AFROREPUBLICK ⭐ GOOD VIBES ⭐ AFROREPUBLICK ⭐ GOOD VIBES ⭐ AFROREPUBLICK ⭐{' '}
                     </h3>
                 </section>
-
-                <section className="bg-custom-yellow mx-auto grid gap-10 py-20">
-                    <div className="mx-4 grid max-w-5xl md:mx-auto md:grid-cols-2">
-                        <div>
-                            <h4 className="font-display text-7xl">
-                                A Festival Like <br /> <span className="bg-green-500 text-white">No Other</span>
-                            </h4>
-                        </div>
-                        <div>
-                            <p className="mx-auto max-w-lg text-2xl">
-                                Brace yourself for 3 days of electrifying performances, vibrant culture, and non-stop party vibes. This is where music
-                                meets paradise.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="mx-auto grid max-w-5xl gap-20 md:grid-cols-2">
-                        <img src={festival} alt="festival" />
-                        <img src={festival} alt="festival" />
-                    </div>
-                </section>
-                <section className="bg-custom-orange overflow-hidden px-2 py-6">
-                    <h3 className="animate-marque font-display text-nowrap md:text-5xl">
-                        ⭐ TICKETS ON SALE⭐ TICKETS ON SALE⭐ TICKETS ON SALE⭐ TICKETS ON SALE⭐ TICKETS ON SALE⭐ TICKETS ON SALE⭐ TICKETS ON
-                        SALE⭐{' '}
-                    </h3>
-                </section>
-                <section className="bg-custom-green pb-9 text-center">
-                    <h3 className="font-display pt-11 text-center text-7xl text-white">Choose Your Experience</h3>
-                    <p className="mt-2 text-2xl text-white">Early Bird Prices Available for a Limited Time!</p>
-
-                    <div className="mx-8 mt-8 grid max-w-5xl md:mx-auto md:grid-cols-3 md:gap-20">
-                        {tickets.map((ticket) => (
-                            <PriceCard
-                                key={ticket.id}
-                                price={ticket.price}
-                                header={ticket.name}
-                                description={ticket.description}
-                                backgroundColor={ticket.color}
-                                id={ticket.id}
-                            />
-                        ))}
-                    </div>
-                </section>
-
-                <section className="bg-custom-yellow overflow-hidden px-2 py-6">
-                    <h3 className="animate-marque font-display text-nowrap md:text-5xl">
-                        ⭐ 30 BEST OF BEST ⭐ 30 BEST OF BEST ⭐ 30 BEST OF BEST ⭐ 30 BEST OF BEST ⭐ 30 BEST OF BEST ⭐ 30 BEST OF BEST ⭐ 30 BEST
-                        OF BEST ⭐{' '}
-                    </h3>
-                </section>
-
-                <section className="mx-auto mt-16">
-                    <h4 className="font-display text-center text-6xl">
-                        The Biggest Names <br /> <span className="bg-custom-yellow text-white">The Hottest Performances</span>
-                    </h4>
-                    <p className="mx-auto mt-7 max-w-md text-center">
-                        Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more
-                        to one stage.
-                    </p>
-                </section>
-                <div className="grid px-5 py-14 md:mx-auto md:max-w-5xl md:grid-cols-3 md:gap-5">
-                    <ArtistCard
-                        image={artist}
-                        artistName="DAVIDO"
-                        artistBio="Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage. Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage."
-                    />
-                    <ArtistCard
-                        image={artist}
-                        artistName="DAVIDO"
-                        artistBio="Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage. Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage."
-                    />
-                    <ArtistCard
-                        image={artist}
-                        artistName="DAVIDO"
-                        artistBio="Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage. Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage."
-                    />
-                </div>
-
-                <section className="bg-custom-blue overflow-hidden px-2 py-6">
-                    <h3 className="animate-marque font-display text-nowrap md:text-5xl">
-                        ⭐ 30 BEST OF BEST ⭐ FEATURED DJ ⭐ 30 BEST OF BEST ⭐ FEATURED DJ ⭐ 30 BEST OF BEST ⭐ FEATURED DJ ⭐ 30 BEST OF BEST
-                        ⭐{' '}
-                    </h3>
-                </section>
-
-                <section className="py-14 md:mx-auto md:max-w-5xl">
-                    <div className="grid gap-5 px-5 md:grid-cols-2 md:px-0">
-                        <h3 className="font-display text-5xl">
-                            UNBEATABLE BEATS, <br />
-                            <span className="text-custom-green"> EXCITING VIBEZ</span>
-                        </h3>
-                        <p className="text-sm">
-                            Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and
-                            more to one stage.
-                        </p>
-                    </div>
-                    <div className="grid px-5 py-14 md:mx-auto md:max-w-5xl md:grid-cols-3 md:gap-5 md:px-0">
-                        <ArtistCard
+                <section className="px-4 py-14 md:mx-auto md:max-w-5xl md:px-0">
+                    <p className="font-display text-custom-green mt-14 text-5xl md:text-7xl">Trending Events</p>
+                    <div className="mt-16 grid-cols-3 gap-5 md:grid">
+                        <EventCard
                             image={artist}
-                            artistName="DAVIDO"
-                            artistBio="Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage. Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage."
+                            date="Friday Aug 1st"
+                            price={12.0}
+                            title="Afrorepublick Food & Drink Festival"
+                            tags={['Dance', 'AfroBeats']}
+                            location="Brixton Storeys"
                         />
-                        <ArtistCard
+                        <EventCard
                             image={artist}
-                            artistName="DAVIDO"
-                            artistBio="Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage. Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage."
+                            date="Friday Aug 1st"
+                            price={12.0}
+                            title="Afrorepublick Food & Drink Festival"
+                            tags={['Dance', 'AfroBeats', 'Reggie', 'House', 'funk']}
+                            location="Brixton Storeys"
                         />
-                        <ArtistCard
+                        <EventCard
                             image={artist}
-                            artistName="DAVIDO"
-                            artistBio="Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage. Experience chart-topping artists, legendary DJs, and breakout stars bringing Afrobeats, Amapiano, Dancehall, Hip-Hop, and more to one stage."
+                            date="Friday Aug 1st"
+                            price={12.0}
+                            title="Afrorepublick Food & Drink Festival"
+                            tags={['Dance', 'AfroBeats']}
+                            location="Brixton Storeys"
                         />
                     </div>
+                    <div className="mt mt-[72px] flex justify-center">
+                        <Link href={route('event')}>
+                            <Button className="rounded-none p-6 text-2xl font-bold" variant="outline">
+                                See More
+                            </Button>
+                        </Link>
+                    </div>
                 </section>
+
                 <section className="bg-custom-light-green px-4 py-14 md:px-0">
                     <div className="md:mx-auto md:max-w-5xl">
                         <h3 className="font-display mt-14 text-5xl md:text-7xl">
@@ -174,7 +87,7 @@ function Homepage({ tickets }: { tickets: TicketPageProps[] }) {
                             <br />
                             the people, and the unforgettable moments.
                         </p>
-                        <div className="my-9 bg-[#CEFEF3] p-8  ">
+                        <div className="my-9 bg-[#CEFEF3] p-8">
                             <img src={beach} alt="Beach festival" />
                         </div>
                         <p className="font-display text-5xl">
