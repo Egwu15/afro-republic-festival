@@ -41,9 +41,10 @@ class EventForm
                     ->options(['draft' => 'Draft', 'published' => 'Published', 'archived' => 'Archived'])
                     ->default('draft')
                     ->required(),
+                
                 FileUpload::make('image')
-                    ->disk('public')
-                    ->image(),
+                    ->disk('public_root')
+                    ->directory('events')
             ]);
     }
 }

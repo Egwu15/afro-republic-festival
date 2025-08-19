@@ -23,15 +23,14 @@ class TicketForm
                     ->relationship('event', 'name')
                     ->required(),
                 Textarea::make('name')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->required(),
                 Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
+                    ->prefix('£'),
                 ColorPicker::make('color')
                     ->required(),
                 TextInput::make('quantity')
