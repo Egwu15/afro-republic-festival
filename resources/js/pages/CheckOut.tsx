@@ -25,11 +25,8 @@ export default function CheckOut({ event }: { event: EventProps }) {
         e.preventDefault();
         post(route('processPayment'), {
             onFinish: () => reset(),
-            onSuccess: () => toast('Success'),
             onError: function (errors) {
-                if (errors.quantity != undefined) {
-                }
-                toast.error(`${errors}`);
+                toast.error(errors.message);
             },
         });
     };
@@ -43,10 +40,10 @@ export default function CheckOut({ event }: { event: EventProps }) {
                         className={`cursor-pointer py-5 ${selectedTicketId === ticket.id ? 'animate-pulse' : 'py-5'}`}
                         onClick={() => setSelectedTicketId(ticket.id)}
                     >
-                        <div style={{ backgroundColor: ticket.color }} className="py-5">
-                            <div className="hover:shadow-2xl-hover mx-7 flex justify-between border-2 border-black bg-white px-5 py-1.5 font-black shadow-2xl shadow-black">
+                        <div style={{ backgroundColor: ticket.color }} className="rounded-sm py-5">
+                            <div className="hover:shadow-2xl-hover mx-7 flex justify-between rounded-sm border-2 border-black bg-white px-5 py-1.5 font-black shadow-2xl shadow-black">
                                 <p>{ticket.name}</p>
-                                <p style={{ backgroundColor: ticket.color }} className="px-2.5">
+                                <p style={{ backgroundColor: ticket.color }} className="rounded px-2.5">
                                     £
                                     {Number(ticket.price).toLocaleString('en-GB', {
                                         minimumFractionDigits: 2,
@@ -86,12 +83,12 @@ export default function CheckOut({ event }: { event: EventProps }) {
                                 </div>
                                 <p className="px-3">${ticket.price * data.quantity}</p>
                             </div>
-                            <div className="flex justify-between">
-                                <div className="flex items-center">
-                                    <p className="font-display p-2">Tax</p>
-                                </div>
-                                <p className="px-3">${ticket.price * data.quantity}</p>
-                            </div>
+                            {/*<div className="flex justify-between">*/}
+                            {/*    <div className="flex items-center">*/}
+                            {/*        <p className="font-display p-2">Tax</p>*/}
+                            {/*    </div>*/}
+                            {/*    <p className="px-3">${ticket.price * data.quantity}</p>*/}
+                            {/*</div>*/}
                             <hr className="border-gray-200" />
                             <div className="flex justify-between">
                                 <div className="flex items-center">
@@ -183,7 +180,7 @@ export default function CheckOut({ event }: { event: EventProps }) {
                     <button
                         onClick={(e) => submit(e)}
                         disabled={processing}
-                        className="font-display shadow-custom-orange border-custom-orange my-5 w-full border-1 bg-white px-5 py-1.5 shadow-2xl hover:bg-black hover:text-white hover:shadow-white"
+                        className="font-display shadow-custom-orange border-custom-orange my-5 w-full rounded-sm border-1 bg-white px-5 py-1.5 shadow-2xl hover:bg-black hover:text-white hover:shadow-white"
                     >
                         <div className="flex justify-center">
                             <p> CONTINUE TO PAYMENT</p>

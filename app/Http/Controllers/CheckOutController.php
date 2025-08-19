@@ -52,7 +52,7 @@ class CheckOutController extends Controller
             'quantity' => $validated['quantity'],
             'amount' => $total,
             'currency' => config('app.currency', 'NGN'),
-            'payment_intent_id' => 'none',
+            'payment_intent_id' => uniqid('temp'),
             'status' => $total <= 0 ? 'paid' : 'pending',
         ]);
 

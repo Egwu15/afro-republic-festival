@@ -45,18 +45,12 @@ class PaymentController extends Controller
                 return redirect()->route('home')->with('error', 'Order not found');
             }
 
-            // Update order with payment confirmation
-            $order->update([
-                'payment_intent_id' => $paymentIntent->id,
-                'status' => 'paid',
-                'amount' => $paymentIntent->amount / 100, // Stripe uses cents
-            ]);
-
-            // Reduce ticket quantity
-            $order->ticket->decrement('quantity', $order->quantity);
-
-            defer(fn() => Mail::send(new TicketRecept($order->toArray())));
-
+            if ($order->status !== 'paid') {
+                $order->update(['status' => 'paid']);
+                $order->ticket->decrement('quantity', $order->quantity);
+                defer(fn() => Mail::send(new TicketRecept($order->toArray())));
+            }
+            
             return Inertia::render('Payment/CallbackSuccess', [
                 'status' => $request->get('redirect_status'),
                 'paymentIntent' => [
