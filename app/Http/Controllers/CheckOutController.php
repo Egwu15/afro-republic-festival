@@ -94,7 +94,7 @@ class CheckOutController extends Controller
             return redirect($charge['data']['authorization_url']);
         } else {
             $order->update(['payment_intent_id' => $charge->id]);
-            $publicKey = config('services.stripe.secret');
+            $publicKey = config('services.stripe.publishable_key');
 
             return Inertia::render('Payment/Stripe', [
                 'clientSecret' => $charge->client_secret,
