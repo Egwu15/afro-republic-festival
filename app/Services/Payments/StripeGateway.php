@@ -5,7 +5,7 @@ namespace App\Services\Payments;
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 
-class StripeGateway implements PaymentGatewayInterface
+class StripeGateway implements PaymentGatewayInterFace
 {
     protected StripeClient $stripe;
 
