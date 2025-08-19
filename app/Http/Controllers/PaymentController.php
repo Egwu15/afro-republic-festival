@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TicketRecept;
-use App\Models\Ticket;
 use App\Models\TicketOrder;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,7 +10,6 @@ use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
-use function Illuminate\Support\defer;
 
 class PaymentController extends Controller
 {
@@ -39,36 +37,35 @@ class PaymentController extends Controller
             }
 
             $meta = $paymentIntent->metadata;
-            $ticket = Ticket::find($meta['ticket_id']);
 
-            $transaction_details = [
-                'ticket_id' => $meta['ticket_id'],
-                'ticket_name' => $ticket->name,
-                'quantity' => $meta['quantity'],
-                'first_name' => $meta['first_name'],
-                'last_name' => $meta['last_name'],
-                'email' => $meta['email'],
-                'phone_number' => $meta['phone_number'],
+            // Retrieve the existing order we created during process()
+            $order = TicketOrder::find($meta['order_id']);
+
+            if (!$order) {
+                return redirect()->route('home')->with('error', 'Order not found');
+            }
+
+            // Update order with payment confirmation
+            $order->update([
                 'payment_intent_id' => $paymentIntent->id,
                 'status' => 'paid',
-                'amount' => $paymentIntent->amount,
-            ];
+                'amount' => $paymentIntent->amount / 100, // Stripe uses cents
+            ]);
 
-            TicketOrder::create($transaction_details);
+            // Reduce ticket quantity
+            $order->ticket->decrement('quantity', $order->quantity);
 
-
-            defer(fn() => Mail::send(new TicketRecept($transaction_details)));
+            defer(fn() => Mail::send(new TicketRecept($order->toArray())));
 
             return Inertia::render('Payment/CallbackSuccess', [
                 'status' => $request->get('redirect_status'),
                 'paymentIntent' => [
                     'id' => $paymentIntent->id,
-                    'amount' => $paymentIntent->amount,
+                    'amount' => $paymentIntent->amount / 100,
                     'currency' => $paymentIntent->currency,
                     'status' => $paymentIntent->status,
                 ],
             ]);
-
 
         } catch (Exception $e) {
             return Inertia::render('Payment/CallbackFailure', [

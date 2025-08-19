@@ -17,8 +17,10 @@
     --color-custom-blue: #3AC6F0;
     --color-custom-light-green: #0BF8C4;
     --color-custom-gray: #FAFAFA;
+    --color-custom-bggray: #1F1F1F;
 
     --animate-marque: marque 30s ease-in-out infinite;
+    --animate-pulse: pulse 3s ease-in-out infinite;
 
     --font-sans: 'poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
@@ -167,4 +169,17 @@
     100% {
         transform: translateX(0%);
     }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 10px 5px rgba(255, 215, 0, 0.5);
+    }
+}
+
+.selected {
+    animation: pulse 1.2s infinite;
 }

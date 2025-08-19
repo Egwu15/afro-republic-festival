@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { type BreadcrumbItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, Info, Menu } from 'lucide-react';
+import { BookOpen, Contact, Folder, Info, Menu } from 'lucide-react';
 
 const rightNavItems: NavItem[] = [
     {
@@ -14,14 +14,19 @@ const rightNavItems: NavItem[] = [
         icon: Folder,
     },
     {
-        title: 'Checkout',
-        href: route('checkout'),
-        icon: BookOpen,
-    },
-    {
         title: 'About',
         href: route('about'),
         icon: Info,
+    },
+    {
+        title: 'Events',
+        href: route('event'),
+        icon: BookOpen,
+    },
+    {
+        title: 'Contact',
+        href: route('contact'),
+        icon: Contact,
     },
 ];
 
@@ -75,7 +80,13 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         <div className="relative flex items-center space-x-1">
                             <div className="hidden lg:flex">
                                 {rightNavItems.map((item) => (
-                                    <Link href={item.href} target="_blank" rel="noopener noreferrer" className="rounded px-3 py-1 hover:bg-white">
+                                    <Link
+                                        key={item.title}
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="rounded px-3 py-1 hover:bg-white"
+                                    >
                                         <span className="font-bold">{item.title}</span>
                                         {/*{item.icon && <Icon iconNode={item.icon} className="size-5 opacity-80 group-hover:opacity-100" />}*/}
                                     </Link>

@@ -49,4 +49,21 @@ export interface TicketPageProps {
     description: string;
     price: number;
     color: string;
+    quantity: number;
+}
+
+export interface EventProps {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    location: string;
+    start_date: string;
+    eventStartDate: string;
+    eventEndDate: string;
+    end_date: string;
+    tickets_min_price: number;
+    status: string;
+    image: string;
+    tickets: TicketPageProps[] | undefined;
 }

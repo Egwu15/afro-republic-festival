@@ -13,14 +13,14 @@ class TicketRecept extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $metadata;
+    public array $data;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(array $metadata)
+    public function __construct(array $data)
     {
-        $this->metadata = $metadata;
+        $this->data = $data;
     }
 
     /**
@@ -29,8 +29,9 @@ class TicketRecept extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            to: $this->metadata['email'],
+            to: $this->data['email'],
             subject: 'Ticket Recept',
+
         );
     }
 
@@ -41,7 +42,7 @@ class TicketRecept extends Mailable
     {
         return new Content(
             view: 'mail.recept',
-            with: ['metadata' => $this->metadata]
+            with: ['data' => $this->data]
         );
     }
 

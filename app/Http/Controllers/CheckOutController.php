@@ -2,70 +2,102 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketRecept;
+use App\Models\Event;
 use App\Models\Ticket;
+use App\Models\TicketOrder;
 use App\Services\Payments\GatewayFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class CheckOutController extends Controller
 {
-    public function index()
+    public function index(Event $event)
     {
-
-        $data = session('checkout');
-        if ($data == null) {
-            return redirect()->route('home');
-        }
-
-        $ticket = Ticket::findOrFail($data['ticket']);
-        if ($ticket == null) {
-            return redirect()->route('home');
-        }
-
+        $event->load('tickets');
         return Inertia::render('CheckOut', [
-            'ticket' => $ticket,
-            'quantity' => $data['quantity']
+            'event' => $event,
         ]);
     }
 
     public function process(Request $request)
     {
-        $data = session('checkout');
-        if (!$data) {
-            return redirect()->route('home');
-        }
+        $validated = $request->validate([
+            'ticket_id' => 'required|exists:tickets,id',
+            'quantity' => 'required|integer|min:1',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:20',
+        ]);
 
         /** @var Ticket $ticket */
-        $ticket = Ticket::findOrFail($data['ticket']);
+        $ticket = Ticket::findOrFail($validated['ticket_id']);
 
-        $quantity = $data['quantity'];
+        if ($ticket->quantity < $validated['quantity']) {
+            return back()->withErrors(['message' => 'Not enough tickets available.'])->withInput();
+        }
 
+        $total = $ticket->price * $validated['quantity'];
+
+        // Create order
+        /**@var TicketOrder $order */
+        $order = TicketOrder::create([
+            'ticket_id' => $ticket->id,
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'quantity' => $validated['quantity'],
+            'amount' => $total,
+            'currency' => config('app.currency', 'NGN'),
+            'payment_intent_id' => 'none',
+            'status' => $total <= 0 ? 'paid' : 'pending',
+        ]);
+
+        // FREE TICKET flow
+        if ($total <= 0) {
+            $ticket->decrement('quantity', $validated['quantity']);
+
+            defer(fn() => Mail::send(new TicketRecept($order->toArray())));
+
+            return Inertia::render('Payment/CallbackSuccess', [
+                'status' => 'paid',
+                'paymentIntent' => [
+                    'id' => null,
+                    'amount' => 0,
+                    'currency' => config('app.currency', 'NGN'),
+                    'status' => 'free',
+                ],
+            ]);
+        }
+
+        // PAID TICKET flow
         $gatewayName = config('app.payment_gateway');
         $gateway = GatewayFactory::make($gatewayName);
 
-        // prepare metadata: you can pass anything you’ll need in a webhook or confirmation page
         $metadata = [
+            'order_id' => $order->id,
             'ticket_id' => $ticket->id,
-            'quantity' => $quantity,
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'receipt_email' => $request->input('email'),
-            'phone_number' => $request->input('phone_number'),
+            'quantity' => $validated['quantity'],
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'receipt_email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
         ];
-
-        // total in major units:
-        $total = $ticket->price * $quantity;
 
         $charge = $gateway->charge($total, config('app.currency'), $metadata);
 
-        // redirect user to payment page/URL
         if ($gatewayName === 'paystack') {
             return redirect($charge['data']['authorization_url']);
         } else {
-            // handle Stripe PaymentIntent: show client_secret to your SPA
+            $order->update(['payment_intent_id' => $charge->id]);
+
             return Inertia::render('Payment/Stripe', [
                 'clientSecret' => $charge->client_secret,
+                'orderId' => $order->id,
             ]);
         }
     }

@@ -1,12 +1,13 @@
-import artist from '@/assets/images/artist.png';
 import background from '@/assets/images/background.jpg';
 import beach from '@/assets/images/beach.jpg';
 import EventCard from '@/components/mine/EventCard';
 import { Button } from '@/components/ui/button';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { EventProps } from '@/types';
 import { Link } from '@inertiajs/react';
 
-function Homepage() {
+function Homepage({ events }: { events: EventProps[] }) {
+    console.log(events);
     return (
         <AppHeaderLayout>
             <main className="bg-custom-gray">
@@ -43,30 +44,19 @@ function Homepage() {
                 <section className="px-4 py-14 md:mx-auto md:max-w-5xl md:px-0">
                     <p className="font-display text-custom-green mt-14 text-5xl md:text-7xl">Trending Events</p>
                     <div className="mt-16 grid-cols-3 gap-5 md:grid">
-                        <EventCard
-                            image={artist}
-                            date="Friday Aug 1st"
-                            price={12.0}
-                            title="Afrorepublick Food & Drink Festival"
-                            tags={['Dance', 'AfroBeats']}
-                            location="Brixton Storeys"
-                        />
-                        <EventCard
-                            image={artist}
-                            date="Friday Aug 1st"
-                            price={12.0}
-                            title="Afrorepublick Food & Drink Festival"
-                            tags={['Dance', 'AfroBeats', 'Reggie', 'House', 'funk']}
-                            location="Brixton Storeys"
-                        />
-                        <EventCard
-                            image={artist}
-                            date="Friday Aug 1st"
-                            price={12.0}
-                            title="Afrorepublick Food & Drink Festival"
-                            tags={['Dance', 'AfroBeats']}
-                            location="Brixton Storeys"
-                        />
+                        {events.map((e: EventProps) => (
+                            <EventCard
+                                id={e.id}
+                                key={e.id}
+                                image={e.image}
+                                slug={e.slug}
+                                date={e.eventStartDate}
+                                price={e.tickets_min_price}
+                                title={e.name}
+                                tags={['Dance', 'AfroBeats']}
+                                location={e.location}
+                            />
+                        ))}
                     </div>
                     <div className="mt mt-[72px] flex justify-center">
                         <Link href={route('event')}>
