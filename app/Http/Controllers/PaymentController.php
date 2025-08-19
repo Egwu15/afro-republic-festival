@@ -50,12 +50,12 @@ class PaymentController extends Controller
                 $order->ticket->decrement('quantity', $order->quantity);
                 defer(fn() => Mail::send(new TicketRecept($order->toArray())));
             }
-            
+
             return Inertia::render('Payment/CallbackSuccess', [
                 'status' => $request->get('redirect_status'),
                 'paymentIntent' => [
                     'id' => $paymentIntent->id,
-                    'amount' => $paymentIntent->amount / 100,
+                    'amount' => $paymentIntent->amount,
                     'currency' => $paymentIntent->currency,
                     'status' => $paymentIntent->status,
                 ],

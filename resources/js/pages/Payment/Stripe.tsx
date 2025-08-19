@@ -4,10 +4,10 @@ import { loadStripe } from '@stripe/stripe-js';
 import React, { FormEvent, useState } from 'react';
 
 // Load public key from .env
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY as string);
 
 interface Props {
     clientSecret: string;
+    publicKey: string;
 }
 
 // Checkout form component
@@ -50,7 +50,8 @@ const CheckoutForm: React.FC = () => {
     );
 };
 
-const StripePage: React.FC<Props> = ({ clientSecret }) => {
+const StripePage: React.FC<Props> = ({ clientSecret, publicKey }) => {
+    const stripePromise = loadStripe(publicKey);
     const options = {
         clientSecret,
     };
