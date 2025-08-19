@@ -33,7 +33,7 @@ class EventsTable
                     ->sortable(),
                 TextColumn::make('status'),
                 ImageColumn::make('image')
-                    ->disk('public'),
+                    ->disk('public_root'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
