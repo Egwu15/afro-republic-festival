@@ -48,22 +48,25 @@ function Event({ events }: { events: EventProps[] }) {
 
                 <Testimonial />
 
-                <section className="bg-custom-light-green mt-10 px-4 py-14 md:px-0">
+                <section className="bg-custom-light-green mt-16 px-4 py-14 md:px-0">
                     <div className="md:mx-auto md:max-w-5xl">
                         <h3 className="font-display mt-14 text-5xl md:text-7xl">
-                            More Than Just Music – <br /> A Full Cultural Experience!
+                            More Than an Event –
+                            <br />A Full Experience!
                         </h3>
-                        <p className="mt-7 text-2xl">
-                            It’s not just about the beats – it’s about the vibes,
+                        <p className="max-w-2xlg mt-7 text-2xl">
+                            It’s not just about what’s happening on stage. It’s about the energy, the people, and the unforgettable moments that bring
+                            everyone together.
                             <br />
-                            the people, and the unforgettable moments.
                         </p>
                         <div className="my-9 bg-[#CEFEF3] p-8">
                             <img src={beach} alt="Beach festival" />
                         </div>
                         <p className="font-display text-5xl">
-                            Beach Parties & Poolside Grooves – <br />
-                            Feel the waves, dance under the sun.
+                            Sun, Fun & Unforgettable Moments <br />
+                            <p className="font-body text-2xl">
+                                Feel the energy, soak up the vibes, and make every moment unforgettable—anywhere the event takes you.
+                            </p>
                         </p>
                     </div>
                 </section>

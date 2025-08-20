@@ -30,9 +30,9 @@ function Homepage({ events }: { events: EventProps[] }) {
                             </p>
                         </div>
                         <p className="mx-auto mt-6 max-w-3xl px-4 text-2xl md:px-0">
-                            We bring the world together through the electrifying rhythm of Afrobeats, Amapiano, and global sounds. Our mission is to
-                            create unforgettable parties and festivals that celebrate music, culture and pure energy uniting diverse communities in a
-                            vibrant atmosphere of joy, rhythm, and unstoppable good vibes.
+                            We bring people together through the infectious rhythms of Afrobeats, Amapiano, and global sounds. Our events are more
+                            than just parties, they’re unforgettable experiences where music, culture, and energy collide. Join us for festivals and
+                            gatherings that celebrate community, joy, and pure, unstoppable vibes.
                         </p>
                     </div>
                 </section>
@@ -70,19 +70,22 @@ function Homepage({ events }: { events: EventProps[] }) {
                 <section className="bg-custom-light-green px-4 py-14 md:px-0">
                     <div className="md:mx-auto md:max-w-5xl">
                         <h3 className="font-display mt-14 text-5xl md:text-7xl">
-                            More Than Just Music – <br /> A Full Cultural Experience!
+                            More Than an Event –
+                            <br />A Full Experience!
                         </h3>
-                        <p className="mt-7 text-2xl">
-                            It’s not just about the beats – it’s about the vibes,
+                        <p className="max-w-2xlg mt-7 text-2xl">
+                            It’s not just about what’s happening on stage. It’s about the energy, the people, and the unforgettable moments that bring
+                            everyone together.
                             <br />
-                            the people, and the unforgettable moments.
                         </p>
                         <div className="my-9 bg-[#CEFEF3] p-8">
                             <img src={beach} alt="Beach festival" />
                         </div>
                         <p className="font-display text-5xl">
-                            Beach Parties & Poolside Grooves – <br />
-                            Feel the waves, dance under the sun.
+                            Sun, Fun & Unforgettable Moments <br />
+                            <p className="font-body text-2xl">
+                                Feel the energy, soak up the vibes, and make every moment unforgettable—anywhere the event takes you.
+                            </p>
                         </p>
                     </div>
                 </section>

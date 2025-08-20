@@ -5,7 +5,7 @@ import TestimonialCard from './TestimonialCard';
 
 function Testimonial() {
     return (
-        <section className="bg-custom-gray mt-36 w-full text-center">
+        <section className="bg-custom-gray mt-36 w-full pb-4 text-center">
             <p className="font-display text-custom-green pt-6 text-4xl md:mt-0 md:text-7xl">Testimonials</p>
             <p className="mt-[52px] text-[30px] md:text-[40px]">
                 What our <span className="text-custom-green">Customer</span> Say{' '}
@@ -15,18 +15,18 @@ function Testimonial() {
             </div>
             <div className="grid-cols-3 gap-6 px-6 md:grid md:px-16">
                 <TestimonialCard
-                    userName="Trusted Users"
-                    testimony="Our experience with the Afro Reublick has been nothing short of exceptional. The website’s user-friendly interface, coupled with great and reliable event anchor, has truly elevated our event convenience. The diverse options and the seamless event creating process make it a go-to choice for our events hosting. We highly recommend them for anyone seeking a delightful and efficient event hosting experience."
+                    userName="Tolu A"
+                    testimony="That event was insane! The energy was crazy from the moment we walked in. Honestly felt like everyone there was part of one big family. Can’t wait for the next one!"
                     image={testimonyImage1}
                 />{' '}
                 <TestimonialCard
-                    userName="Trusted Users"
-                    testimony="Our experience with the Afro Reublick has been nothing short of exceptional. The website’s user-friendly interface, coupled with great and reliable event anchor, has truly elevated our event convenience. The diverse options and the seamless event creating process make it a go-to choice for our events hosting. We highly recommend them for anyone seeking a delightful and efficient event hosting experience."
+                    userName="Jade E"
+                    testimony="We hosted our own pop-up through AfroRepublick and it was such a vibe. They made everything so easy, and the crowd was 🔥. Definitely doing it again."
                     image={testimonyImage2}
                 />{' '}
                 <TestimonialCard
-                    userName="Trusted Users"
-                    testimony="Our experience with the Afro Reublick has been nothing short of exceptional. The website’s user-friendly interface, coupled with great and reliable event anchor, has truly elevated our event convenience. The diverse options and the seamless event creating process make it a go-to choice for our events hosting. We highly recommend them for anyone seeking a delightful and efficient event hosting experience."
+                    userName="Mike D"
+                    testimony="Bro… I still think about that night. The setup, the people, the vibes! everything was on point. It wasn’t just an event, it was an experience."
                     image={testimonyImage3}
                 />
             </div>
